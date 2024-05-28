@@ -1,0 +1,187 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+   	<div class="banner-area banner-bg-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="banner">
+						<h2>Careers</h2>
+						<ul class="page-title-link">
+							<li><a href="{% url 'index' %}">Home</a></li>
+							<li><a href="#">Careers</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div id="about" class="section wb">
+        <div class="container">
+            <div class="row pricing-row">
+                {% for j in Jobs %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricingTable">
+                        <div class="pricingTable-header">
+                            <h3 class="title">{{j.Title}}</h3>
+                            {% comment %} <span class="sub-title">Lorem ipsum</span>
+                            <span class="year">Pay only <br>$110/year</span> {% endcomment %}
+                        </div>
+                        <div class="price-value">
+                        </div>
+                        <ul class="pricing-content">
+                            <li>{{j.Description}}</li>
+                            <li>Requirments:- {{j.Requirments}} Employees</li>
+                            <li>Salary:- {{j.Salary_Range}} $/Month</li>
+                            <li>Location:- {{j.Location}}</li>
+                            {% comment %} <li class="disable">15 Domains</li> {% endcomment %}
+                        </ul>
+                        <div class="price-value pb-0">
+                            <button type="button" class="btn btn-light p-5" data-toggle="modal" data-target="#myModal"  onclick="setJobId({{j.job_id}})">Apply Now</button>
+                        </div>
+                        {% comment %}<a href="#" class="pricingTable-signup" data-toggle="modal" data-target="#bd-example-modal-lg">Apply Now</a> {% endcomment %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                    <!-- Modal content-->
+                        <div class="modal-content mx-auto">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" style="color: #fff;"></i></button>
+                                <h4 class="modal-title">Application Form</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="testimonial_form">
+                                    <fieldset class="row">
+                                        {% csrf_token %}
+                                            <input type="hidden" name="job_id" id="job_id" />
+                                            <input type="text" name="First_Name" id="First_Name" class="form-control fw-bold" placeholder="First Name " />
+                                            <input type="text" name="Last_Name" id="Last_Name" class="form-control fw-bold" placeholder="Last Name " />
+                                            <input type="email" name="Email" id="Email" class="form-control fw-bold" placeholder="Email" />
+                                            <input type="text" name="Mobile" id="Mobile" class="form-control fw-bold" placeholder="Mobile" />
+                                            <label for="Resume" class="form-label fw-bold">Resume</label>
+                                            <input type="file" name="Resume" id="Resume" class="form-control fw-bold" />
+                                    </fieldset>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-lg-6">
+                                    <button class="btn btn-light btn-radius btn-block submitform">Submit</button>
+                                </div>
+                                <div class="col-lg-3">
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            {% comment %} </div><!-- end row --> {% endcomment %}
+        </div><!-- end container -->
+    </div><!-- end section -->
+    
+    <div id="testimonials" class="parallax section db parallax-off" style="background-image:url('uploads/parallax_03.jpg');">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>Testimonials</h3>
+                <p class="lead">We thanks for all our awesome testimonials! There are hundreds of our happy customers!
+                    Let's see what others say about Royal Monarch.</p>
+            </div><!-- end title -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="testi-carousel owl-carousel owl-theme">
+                        {% for i in Testimonials %}
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> {{i.Sub_Feedback}}</h3>
+                                <p class="lead">{{i.Feedback}}</p>
+                            </div>
+                            <div class="testi-meta">
+                                {% comment %} <img src="uploads/testi_01.png" alt="" class="img-responsive alignleft"> {% endcomment %}
+                                <h4>{{i.First_Name}} {{i.Last_Name}}</h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        {% endfor %}
+                        <!-- end testimonial -->
+                    </div><!-- end carousel -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+            {% comment %} <hr class="hr1"> {% endcomment %}
+
+            
+
+        </div><!-- end container -->
+    </div><!-- end section -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function setJobId(jobId) {
+            document.getElementById('job_id').value = jobId;
+        }
+
+        document.querySelectorAll('.submitform').forEach(button =>{
+            button.addEventListener('click', function(){
+                var firstname = document.querySelector('#First_Name');
+                console.log(firstname);
+                var lastname = document.querySelector('#Last_Name');
+                var email = document.querySelector('#Email');
+                var mobile = document.querySelector('#Mobile');
+                var resume = document.querySelector('#Resume');
+                var jobId = document.querySelector('#job_id');
+                //var areaname = document.querySelector('#areaname');
+
+                
+                var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+                var formdata = {
+                    'First_Name': firstname.value,
+                    'Last_Name': lastname.value,
+                    'Email': email.value,
+                    'Mobile': mobile.value,
+                    'Resume': resume.value,
+                    'job_id': jobId.value
+                    //'Picture': picture.value
+                    //'Area': areaname.value
+
+                };
+                $.ajax({
+                    url : 'http://127.0.0.1:8000/apply_job',
+                    method:'POST',
+                    contentType:'application/json',
+                    headers : {
+                        'X-CSRFToken':csrfToken
+                    },
+                    data:JSON.stringify(formdata),
+                    success:function(data){
+                        if (data.Status) {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            if (data.redirect_url) {
+                                window.location.href = data.redirect_url;
+                            }
+                        }
+                    },
+                    error:function(jqXHR, textStatus, errorThrown){
+                        try {
+                            var errorMsg = JSON.parse(jqXHR.responseText);
+                            alert('Error occurred: ' + errorMsg.Msg);
+                            if (errorMsg.redirect_url) {
+                                window.location.href = errorMsg.redirect_url;
+                            }
+                        } catch (e) {
+                            console.error('Could not parse response as JSON: ', jqXHR.responseText);
+                        }
+                    }
+                });
+                
+                });
+        });
+    </script>
+    {% endblock  %}

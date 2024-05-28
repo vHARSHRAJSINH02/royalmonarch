@@ -1,0 +1,177 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+  {% load static %}
+
+  <div class="banner-area banner-bg-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="banner">
+            <h2>Contact</h2>
+            <ul class="page-title-link">
+              <li>
+                <a href="{% url 'index' %}">Home</a>
+              </li>
+              <li>
+                <a href="{% url 'contact' %}">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact" class="section wb">
+    <div class="container">
+      <div class="section-title text-center">
+        <h3>Get in touch</h3>
+        <p class="lead">
+          Let us give you more details about the special offer website you want us. Please fill out the form below. <br />We have million of website owners who happy to work with us!
+        </p>
+      </div>
+      <!-- end title -->
+
+      <div class="row">
+        <div class="col-md-8 col-lg-7 col-sm-12">
+          <div class="contact_form">
+            <div id="message"></div>
+            <form>
+                {% csrf_token %}
+              <fieldset class="row-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <input type="text" name="first_name" id="first_name" class="form-control fw-bold" placeholder="First Name " />
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" />
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" />
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone" />
+                </div>
+                {% comment %} 
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="sr-only">Select Service</label>
+                  <select name="select_service" id="select_service" class="selectpicker form-control" data-style="btn-white">
+                    <option value="Installation Service">Installation Service</option>
+                    <option value="Web Design">Web Design</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="sr-only">What is max price?</label>
+                  <select name="select_price" id="select_price" class="selectpicker form-control" data-style="btn-white">
+                    <option value="$100 - $2000">$100 - $2000</option>
+                    <option value="$2000 - $4000">$2000 - $4000</option>
+                    <option value="$4000 - $10000">$4000 - $10000</option>
+                  </select>
+                </div>
+                {% endcomment %}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <textarea class="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                  <button class="btn btn-light btn-radius btn-brd grd1 btn-block submitform">Submit</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <!-- end col -->
+
+        <div class="col-md-4 col-lg-5 col-sm-12 pd-add">
+          <div class="card">
+            <div class="address-item">
+              <div class="address-icon">
+                <i class="icon icon-location2"></i>
+              </div>
+              <h3>Headquarters</h3>
+              <p>12200 Ford Rd, STE A432, Farmers Branch, Texas-75234</p>
+            </div>
+
+            <div class="address-item">
+              <div class="address-icon">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </div>
+              <h3>Email Us</h3>
+              <p>info@roymon.com</p>
+            </div>
+
+            <div class="address-item">
+              <div class="address-icon">
+                <i class="icon icon-headphones"></i>
+              </div>
+              <h3>Call Us</h3>
+              <p>(224) 269-0303</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end section -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    document.querySelectorAll('.submitform').forEach(button =>{
+        button.addEventListener('click', function(){
+            var firstname = document.querySelector('#first_name');
+            console.log(firstname);
+            var lastname = document.querySelector('#last_name');
+            var email = document.querySelector('#email');
+            var phone = document.querySelector('#phone');
+            var comment = document.querySelector('#comments');
+            //var areaname = document.querySelector('#areaname');
+
+            
+            var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+            var formdata = {
+                'First_Name': firstname.value,
+                'Last_Name': lastname.value,
+                'Email': email.value,
+                'Mobile': phone.value,
+                'Comments': comment.value
+                //'Area': areaname.value
+
+            };
+            $.ajax({
+                url : 'http://127.0.0.1:8000/contact_form',
+                method:'POST',
+                contentType:'application/json',
+                headers : {
+                    'X-CSRFToken':csrfToken
+                },
+                data:JSON.stringify(formdata),
+                success:function(data){
+                    if (data.Status) {
+                        window.location.href = data.redirect_url;
+                    } else {
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        }
+                    }
+                },
+                error:function(jqXHR, textStatus, errorThrown){
+                    try {
+                        var errorMsg = JSON.parse(jqXHR.responseText);
+                        alert('Error occurred: ' + errorMsg.Msg);
+                        if (errorMsg.redirect_url) {
+                            window.location.href = errorMsg.redirect_url;
+                        }
+                    } catch (e) {
+                        console.error('Could not parse response as JSON: ', jqXHR.responseText);
+                    }
+                }
+            });
+            
+            });
+    });
+  </script>
+{% endblock %}

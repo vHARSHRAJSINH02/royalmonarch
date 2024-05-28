@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+      
+      * {
+        box-sizing: border-box;
+        font-family: 'Quicksand', sans-serif;
+      }
+      
+      html,
+      body {
+        margin: 0;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="full-screen-container">
+      <div class="login-container">
+        <h3 class="login-title">Verify OTP</h3>
+        <form>
+            {% csrf_token %}
+          <div class="loginform input-group">
+            <label>OTP</label>
+            <input type="text" name="OTP" id="OTP"  required/>
+          </div>
+          <button type="submit" class="login-button verifyotp">Verify OTP</button>
+        </form>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.querySelectorAll('.verifyotp').forEach(button =>{
+            button.addEventListener('click', function(){
+                var otp = document.querySelector('#OTP');
+                var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+                var formdata = {
+                    'OTP': otp.value
+                };
+                $.ajax({
+                    url : '/verify_Otp',
+                    method:'POST',
+                    contentType:'application/json',
+                    headers : {
+                        'X-CSRFToken':csrfToken
+                    },
+                    data:JSON.stringify(formdata),
+                    success:function(data){
+                      if (data.Status) {
+                          window.location.href = '/';
+                      } else {
+                          if (data.redirect_url) {
+                              window.location.href = data.redirect_url;
+                          }
+                      }
+                  },
+                  error:function(jqXHR, textStatus, errorThrown){
+                      try {
+                          var errorMsg = JSON.parse(jqXHR.responseText);
+                          alert('Error occurred: ' + errorMsg.Msg);
+                          if (errorMsg.redirect_url) {
+                              window.location.href = errorMsg.redirect_url;
+                          }
+                      } catch (e) {
+                          console.error('Could not parse response as JSON: ', jqXHR.responseText);
+                      }
+                  }
+                });
+                
+                });
+        });
+    </script>
+  </body>
+</html>

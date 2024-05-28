@@ -1,0 +1,278 @@
+{% extends 'basic.html' %}
+{% block content %}
+{% load static %}
+    <div class="banner-area banner-bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="banner">
+                        <h2>Our Services</h2>
+                        <ul class="page-title-link">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'services' %}">Our Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="section wb">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-item ">
+                        <div class="about-icon ">
+                            <a href="#devops">
+                                <img src="{% static 'uploads/service_01.jpg' %}" alt="" class="img-responsive img-rounded">
+                            </a>
+                            <!-- <span class="icon icon-display"></span> -->
+                        </div>
+                        <div class="about-text">
+                            <h3> <a href="#devops">DevOps </a></h3>
+                            <p>Bridging gaps between<br /> software development and operations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <a href="#cloud">
+                                <img src="{% static 'uploads/service_02.jpg' %}" alt="" class="img-responsive img-rounded">
+                            </a>
+                            <!-- <span class="icon icon-database"></span> -->
+                        </div>
+                        <div class="about-text">
+                            <h3> <a href="#cloud">CLOUD </a></h3>
+                            <p>Optimize the cost, agility and scalability of your <br />IT ecosystem.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <a href="#networking">
+                                <img src="{% static 'uploads/service_03.jpg' %}" alt="" class="img-responsive img-rounded">
+                            </a>
+                            <!-- <span class="icon icon-magic-wand"></span> -->
+                        </div>
+                        <div class="about-text">
+                            <h3> <a href="#networking">NETWORKING </a></h3>
+                            <p>Tailored technology solutions from design, deployment <br />and support.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <a href="#fullstack">
+                                <img src="{% static 'uploads/service_04.jpg' %}" alt="" class="img-responsive img-rounded">
+                            </a>
+                            <!-- <span class="icon icon-cloud"></span> -->
+                        </div>
+                        <div class="about-text">
+                            <h3> <a href="#fullstack">FULL-STACK </a></h3>
+                            <p>Web and Mobile Solutions for Innovative, Transforming & Inspiring Businesses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+    <div id="services" class="parallax section lb section wb">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>Our Service</h3>
+                <!-- <p class="lead">Our Service unlimited solutions to all your business needs. in the installation package we prepare search engine optimization, social media support, we provide corporate identity and graphic design services.</p> -->
+            </div><!-- end title -->
+            <div class="row section wb" id="devops">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="message-box">
+                            <h1>DevOps</h1>
+                            <h2>#1 site for DevOps Consulting</h2>
+                            <p class="lead">Bridging gaps between
+                                software development
+                                and operations</p>
+
+                            <p>DevOps is an operational approach that values collaboration, communication and
+                                integration between software developers and IT operations. By working with our expert
+                                engineers, your business will be able to take on the DevOps viewpoint of sharing,
+                                collaboration, measurement, and automation via a structured change initiative that lets
+                                you stay in control, save money, and overcome the difficulty of reconciling agile
+                                culture with the need for reliability.
+
+                                We leverage our extensive experience in DevOps to provide our customers with
+                                comprehensive DevOps consulting services.</p>
+
+                            <!-- <a href="#services" class="btn btn-light btn-radius btn-brd grd1">Learn More</a> -->
+                        </div><!-- end messagebox -->
+
+                    </div><!-- end col -->
+
+                    <div class="col-md-6">
+                        <div class="post-media wow fadeIn">
+                            <img src="{% static 'uploads/service_01.jpg' %}" alt="" class="img-responsive img-rounded" style="height: 380px;">
+                            <!-- <a href="http://www.youtube.com/watch?v=nrJtHemSPW4" data-rel="prettyPhoto[gal]" class="playbutton"><i class="flaticon-play-button"></i></a> -->
+                        </div><!-- end media -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                
+            </div>
+
+
+        
+            <div class="row section wb" id="cloud">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="post-media wow fadeIn">
+                            <img src="{% static 'uploads/service_02.jpg' %}" alt="" class="img-responsive img-rounded">
+                        </div><!-- end media -->
+                    </div><!-- end col -->
+    
+                    <div class="col-md-6">
+                        <div class="message-box">
+                            <h1>Cloud</h1>
+                            <h2>#1 site for Cloud Consulting</h2>
+                            <p class="lead">Services on Cloud</p>
+    
+                            <p> The use of cloud is growing at an exponential rate. Cloud Services always holds an edge when compared to the traditional approach of catering infrastructure and running in-house applications. At Royal Monarch cloud consulting services focus the enterprise on methodologies and systems. This advisory model encourages development infrastructures that sustain commercial growth, while ensuring that competitive advantages are maintained. </p>
+                            <p>Royal Monarch Certified cloud computing architects, consultants and experts can assist your organization in tailoring the perfect cloud solution for all your business requirements.</p>
+                            
+                            <!-- <a href="#services" class="btn btn-light btn-radius btn-brd grd1">Learn More</a> -->
+                        </div><!-- end messagebox -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <div class="row">
+                    <h3>Cloud Services</h3>
+                    <h3>&rarr; Amazon Web Services Solutions  &nbsp;
+                        &rarr;  Microsoft Azure  &nbsp;
+                        &rarr; Google Cloud Solutions &nbsp;
+                        &rarr; DevOps On Cloud  </h3> 
+                </div>
+            </div>
+            
+            <div class="row section wb" id="networking">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="message-box">
+                            <h1>NETWORKING</h1>
+                            <h2>#1 site Network Consulting</h2>
+                            <p class="lead">Services on Network</p>
+
+                            <p>The use of cloud is growing at an exponential rate. Cloud Services always holds an edge when compared to the traditional approach of catering infrastructure and running in-house applications. At Royal Monarch cloud consulting services focus the enterprise on methodologies and systems. This advisory model encourages development infrastructures that sustain commercial growth, while ensuring that competitive advantages are maintained.
+
+                                Our certified engineers and architects can assist you with configuration, networking design and deployment. We support organizations of all sizes to meet their network objectives including Fortune 500 companies.</p>
+
+                            <!-- <a href="#services" class="btn btn-light btn-radius btn-brd grd1">Learn More</a> -->
+                        </div><!-- end messagebox -->
+
+                    </div><!-- end col -->
+
+                    <div class="col-md-6">
+                        <div class="post-media wow fadeIn">
+                            <img src="{% static 'uploads/service_03.jpg' %}" alt="" class="img-responsive img-rounded" style="height: 380px;">
+                            <!-- <a href="http://www.youtube.com/watch?v=nrJtHemSPW4" data-rel="prettyPhoto[gal]" class="playbutton"><i class="flaticon-play-button"></i></a> -->
+                        </div><!-- end media -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <!-- <div class="row">
+                    
+                        <div class="message-box row">
+                            <h1>DevOps Tools</h1>
+                        </div>
+                         
+                </div>-->
+            </div>
+            
+            <div class="row section wb" id="fullstack">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="post-media wow fadeIn">
+                            <img src="{% static 'uploads/service_04.jpg' %}" alt="" class="img-responsive img-rounded">
+                        </div><!-- end media -->
+                    </div><!-- end col -->
+    
+                    <div class="col-md-6">
+                        <div class="message-box">
+                            <h1>FULL-STACK</h1>
+                            <h2>#1 site for Full Stack</h2>
+                            <p class="lead">Full Stack Development</p>
+    
+                            <p> “Full Stack Development is to have specialized knowledge in all stages of software development.”
+
+                                A full-stack developer has all the keys to the house — there is no door that you cannot open.
+                                Royal Monarch Consultants are versatile enough and subject matter experts in full stack development to handle multiple aspects in software development domain. Our full stack expertise include developing an end to end software product, project planning, requirements gathering, long term production support.
+                                
+                                We offer best solutions which is cost efficient and highly optimized. Our consultants are experienced with multiple and different technology stacks. Our services are not restricted to particular technology, framework or programming language, we develop best solutions with the most effective technology choices by considering the cost and time.
+                                
+                                Just to name some, we are expertise in
+                                Front End technologies like HTML, CSS, Javascript, jQuery, AngularJS, ReactJS. Backend and Programming like JAVA, .NET, PHP, Node.js, Python Databases like MySQL, MS SQL Server, MongoDB</p>
+                            
+                            <!-- <a href="#services" class="btn btn-light btn-radius btn-brd grd1">Learn More</a> -->
+                        </div><!-- end messagebox -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <div class="row">
+                    
+                </div>
+            </div>
+
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+    <div id="testimonials" class="parallax section db parallax-off">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>Testimonials</h3>
+                <p class="lead">We thanks for all our awesome testimonials! There are hundreds of our happy customers! <br>Let's see what others say about Royal Monarch.</p>
+            </div><!-- end title -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="testi-carousel owl-carousel owl-theme">
+                        {% for i in Testimonials %}
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> {{i.Sub_Feedback}}</h3>
+                                <p class="lead">“{{i.Feedback}}”</p>
+                            </div>
+                            <div class="testi-meta">
+                                <!-- <img src="uploads/testi_01.png" alt="" class="img-responsive alignleft"> -->
+                                <h4>{{i.First_Name}} {{i.Last_Name}} <small></small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        {% endfor %}
+                        <!-- end testimonial -->
+                    </div><!-- end carousel -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+            <!-- <hr class="hr1"> -->
+
+            <!-- <div class="row logos">
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_01.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_02.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_03.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_04.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_05.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_06.png" alt="" class="img-repsonsive"></a>
+                </div>
+            </div>end row -->
+
+        </div><!-- end container -->
+    </div><!-- end section -->
+    {% endblock  %}

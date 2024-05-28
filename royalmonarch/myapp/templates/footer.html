@@ -1,0 +1,155 @@
+{% load static %}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <img src="{% static 'uploads/logowhite (1).png' %}" style="width: 200px;" alt="" />
+                    </div>
+                    <p style="color: aliceblue;"><i class="fa fa-phone" aria-hidden="true"></i> Phone :<a href="tel:(224) 269-0303" style="color: aliceblue;"> (224) 269-0303</a></p>
+                    <p style="color: aliceblue;"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email :<a href="info@roymon.com" style="color: aliceblue;"> info@roymon.com</a></p>
+                    <p style="color: aliceblue;"><i class="fa fa-map-marker" aria-hidden="true"></i> Address : 12200 Ford Rd Suite #A432 <br/>Farmers Branch Texas 75234</p>
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Services</h3>
+                    </div>
+
+                    <ul class="footer-links hov">
+                        <li><a href="{% url 'services' %}#devops">DevOps <span class="icon icon-arrow-right2"></span></a></li>
+                        <li><a href="{% url 'services' %}#cloud">Cloud <span class="icon icon-arrow-right2"></span></a></li>
+                        <li><a href="{% url 'services' %}#networking">Network <span class="icon icon-arrow-right2"></span></a></li>
+                        <li><a href="{% url 'services' %}#fullstack">Full-Stack <span class="icon icon-arrow-right2"></span></a></li>
+                        <!-- <li><a href="#">Faq <span class="icon icon-arrow-right2"></span></a></li> -->
+                        <!-- <li><a href="#">Contact <span class="icon icon-arrow-right2"></span></a></li> -->
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Pages</h3>
+                    </div>
+
+                    <ul class="footer-links hov">
+                        <!-- <li><a href="#">Home <span class="icon icon-arrow-right2"></span></a></li> -->
+                        <!-- <li><a href="#">Blog <span class="icon icon-arrow-right2"></span></a></li> -->
+                        <!-- <li><a href="#">Pricing <span class="icon icon-arrow-right2"></span></a></li> -->
+                        <li><a href="{% url 'testimonials' %}">Testimonials <span class="icon icon-arrow-right2"></span></a></li>
+                        
+                        {% if request.session.emp %}
+                            <li><a href="{% url 'addjobs' %}">Add jobs <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="{% url 'applications' %}">View Applications<span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="{% url 'logout_emp' %}">Logout<span class="icon icon-arrow-right2"></span></a></li>
+                        {% else %}
+                            <li><a href="{% url 'about' %}">About <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="{% url 'contact' %}">Contact <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="{% url 'login' %}">Login <span class="icon icon-arrow-right2"></span></a></li>
+                        {% endif %}
+                        
+
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="footer-distributed widget clearfix">
+                    <div class="widget-title">
+                        <h3>Contact Us</h3><br/>
+                        <input type="text" name="name" id="name" class="form-control"  placeholder="Name"><br/>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email"><br/>
+                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject"><br/>
+                        <textarea name="text" id="text" cols="20" rows="2" class="form-control" placeholder="Text"></textarea><br/>
+                        <button class="btn btn-light   btn-block  mailform"> Submit <i class="fa fa-envelope-o"></i></button>
+                    </div>
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</footer><!-- end footer -->
+
+<div class="copyrights">
+    <div class="container">
+        <div class="footer-distributed">
+            <div class="footer-left">                   
+                <p class="footer-company-name">All Rights Reserved. &copy; 2024 <a href="#">Royal Monarch</a> Design By : 
+                <a href="mailto:divybavishi001@gmail.com">Divy Bavishi</a> <a href="tel:+91 8401915476">(+91 84019 15476)</a></p>
+            </div>
+        </div>
+    </div><!-- end container -->
+</div><!-- end copyrights -->
+
+<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    document.querySelectorAll('.mailform').forEach(button =>{
+        button.addEventListener('click', function(){
+            console.log('hello');
+            var name = document.querySelector('#name');
+            var email = document.querySelector('#email');
+            var subject = document.querySelector('#subject');
+            var text = document.querySelector('#text');
+           // var picture = document.querySelector('#Picture');
+            //var areaname = document.querySelector('#areaname');
+
+            
+            var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+            var formdata = {
+                'Name': name.value,
+                'Email': email.value,
+                'subject': subject.value,
+                'Text': text.value
+                //'Picture': picture.value
+                //'Area': areaname.value
+            };
+            $.ajax({
+                url : 'http://127.0.0.1:8000/mailform',
+                method:'POST',
+                contentType:'application/json',
+                headers : {
+                    'X-CSRFToken':csrfToken
+                },
+                data:JSON.stringify(formdata),
+                success:function(data){
+                    if (data.Status) {
+                        window.location.href = data.redirect_url;
+                    } else {
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        }
+                    }
+                },
+                error:function(jqXHR, textStatus, errorThrown){
+                    try {
+                        var errorMsg = JSON.parse(jqXHR.responseText);
+                        alert('Error occurred: ' + errorMsg.Msg);
+                        if (errorMsg.redirect_url) {
+                            window.location.href = errorMsg.redirect_url;
+                        }
+                    } catch (e) {
+                        console.error('Could not parse response as JSON: ', jqXHR.responseText);
+                    }
+                }
+            });
+            
+            });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<!-- ALL JS FILES -->
+<script src="{% static 'js/all.js' %}"></script>
+<!-- ALL PLUGINS -->
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/portfolio.js' %}"></script>
+<script src="{% static 'js/hoverdir.js' %}"></script>    
+
+</body>
+</html>

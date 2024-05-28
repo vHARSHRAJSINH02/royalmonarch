@@ -1,0 +1,340 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block content %}
+
+<div class="datatable-container">
+    <!-- ======= Header tools ======= -->
+    <div class="header-tools">
+      <div class="tools">
+        <ul>
+          <li>
+            <button class="btn-light" data-toggle="modal" data-target="#addnewModal">
+                Add New
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="modal fade" id="addnewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content jobspopup">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Job details</h5>
+            <button type="button" class="close" style="color: azure;" data-dismiss="modal" aria-label="Close">
+                &times;
+            </button>
+            </div>
+            <div class="modal-body">
+            <form>
+                {% csrf_token %}
+                <fieldset class="row-fluid">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="New-Title" class="label-control">Add Job Titile</label>
+                        <input type="text" name="New-Title" id="New-Title" class="form-control fw-bold " placeholder="Add job Title " />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="New-Requirments" class="label-control">Requirments</label>
+                        <input type="text" name="New-Requirments" id="New-Requirments" class="form-control fw-bold " placeholder="Add Requirments" />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="New-salary-range" class="label-control">Salary-Range</label>
+                        <input type="text" name="New-salary-range" id="New-salary-range" class="form-control fw-bold " placeholder="Add salary-range " />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="New-Location" class="label-control">Location</label>
+                        <input type="text" name="New-Location" id="New-Location" class="form-control fw-bold " placeholder="Add Location " />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="New-Discription" class="label-control">Description</label>
+                        <textarea class="form-control" name="New-Discription" id="New-Discription" rows="6" placeholder="Give us more details.."></textarea>
+                    </div>
+                </fieldset>
+            </form>
+            
+
+            </div>
+            <div class="modal-footer">
+            {% comment %} <button type="button" class="btn btn-light" data-dismiss="modal">Close</button> {% endcomment %}
+            <button type="button" class="btn btn-light addnewjobs">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+      {% comment %} <div class="search">
+        <input type="search" class="search-input" placeholder="Search..." />
+      </div> {% endcomment %}
+    </div>
+    
+    <!-- ======= Table ======= -->
+    <table class="datatable">
+      <thead>
+        <tr>
+          <th>Job Id</th>
+          <th>Job Title</th>
+          <th>Requirments</th>
+          <th>Salary-Range</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Post Date-Time</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        {% for i in Jobs %}
+        <tr>
+          <td>{{i.job_id}}</td>
+          <td>{{i.Title}}</td>
+          <td>{{i.Requirments}}</td>
+          <td>{{i.Salary_Range}}</td>
+          <td>{{i.Location}}</td>
+          <td>{{i.Description}}</td>
+          <td>{{i.Date_Time}}</td>
+          <td>
+            <button type="button" class="btn-icon mx-auto edit-jobs" data-toggle="modal" data-target="#exampleModal" data-id="{{i.job_id}}" data-title="{{i.Title}}" data-requirments="{{i.Requirments}}" data-salary-range="{{i.Salary_Range}}" data-location="{{i.Location}}" data-description="{{i.Description}}">
+                <i class="fa fa-edit"></i>
+             </button>
+            <button class="btn-icon mx-auto deletejobs" data-jobid="{{i.job_id}}">
+                <i class="fa-solid fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content jobspopup">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Job details</h5>
+                <button type="button" class="close" style="color: azure;" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+                </div>
+                <div class="modal-body">
+                <form>
+                    {% csrf_token %}
+                    <fieldset class="row-fluid">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="Title" class="label-control">Add Job Titile</label>
+                            <input type="text" name="Title" id="Title" class="form-control fw-bold " placeholder="Add job Title " />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="Requirments" class="label-control">Requirments</label>
+                            <input type="text" name="Requirments" id="Requirments" class="form-control fw-bold " placeholder="Add Requirments" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="salary-range" class="label-control">Salary-Range</label>
+                            <input type="text" name="salary-range" id="salary-range" class="form-control fw-bold " placeholder="Add salary-range " />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="Location" class="label-control">Location</label>
+                            <input type="text" name="Location" id="Location" class="form-control fw-bold " placeholder="Add Location " />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="Discription" class="label-control">Description</label>
+                            <textarea class="form-control" name="Discription" id="Discription" rows="6" placeholder="Give us more details.."></textarea>
+                        </div>
+                    </fieldset>
+                </form>
+                
+
+                </div>
+                <div class="modal-footer">
+                {% comment %} <button type="button" class="btn btn-light" data-dismiss="modal">Close</button> {% endcomment %}
+                <button type="button" class="btn btn-light editjobs">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </table>
+  
+    {% comment %} <!-- ======= Footer tools ======= -->
+    <div class="footer-tools">
+      <div class="list-items">
+        Show
+        <select name="n-entries" id="n-entries" class="n-entries">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+        </select>
+        entries
+      </div>
+  
+      <div class="pages">
+        <ul>
+          <li><span class="active">1</span></li>
+          <li><button>2</button></li>
+          <li><button>3</button></li>
+          <li><button>4</button></li>
+          <li><span>...</span></li>
+          <li><button>9</button></li>
+          <li><button>10</button></li>
+        </ul>
+      </div>
+    </div> {% endcomment %}
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.edit-jobs').on('click', function(){
+        
+        var jobid = $(this).data('id');
+        var title = $(this).data('title');
+        var requirments = $(this).data('requirments');
+        var salaryrange = $(this).data('salary-range');
+        var location = $(this).data('location');
+        var desc = $(this).data('description');
+
+        
+        //$('#firstname1').val(jobid);
+        $('#Title').val(title);
+        $('#Requirments').val(requirments);
+        $('#salary-range').val(salaryrange);
+        $('#Location').val(location);
+        $('#Discription').val(desc);
+        $('.editjobs').data('jobid', jobid);
+    });
+    });
+$('.editjobs').on('click', function(){
+    //var shipadd_id = shipadd;
+    var job_id = $(this).data('jobid');
+    console.log(job_id);
+    var title = document.querySelector('#Title');
+    var requirments = document.querySelector('#Requirments');
+    var salaryrange = document.querySelector('#salary-range');
+    var location = document.querySelector('#Location');
+    var description = document.querySelector('#Discription');
+    //var areaname = document.querySelector('#areaname1');
+
+
+    var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+    var formdata = {
+        'Job_id': job_id,
+        'Title': title.value,
+        'Requirments': requirments.value,
+        'SalaryRange': salaryrange.value,
+        'Location': location.value,
+        'Description': description.value
+    };
+    $.ajax({
+        url : '/editjobs',
+        method:'POST',
+        contentType:'application/json',
+        headers : {
+            'X-CSRFToken':csrfToken
+        },
+        data:JSON.stringify(formdata),
+        success:function(data){
+            if (data.Status) {
+                window.location.href = data.redirect_url;
+            } else {
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                }
+            }
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            try {
+                var errorMsg = JSON.parse(jqXHR.responseText);
+                alert('Error occurred: ' + errorMsg.Msg);
+                if (errorMsg.redirect_url) {
+                    window.location.href = errorMsg.redirect_url;
+                }
+            } catch (e) {
+                console.error('Could not parse response as JSON: ', jqXHR.responseText);
+            }
+        }
+    });
+    });
+
+$('.addnewjobs').on('click', function(){
+    var title = document.querySelector('#New-Title');
+    var requirments = document.querySelector('#New-Requirments');
+    var salaryrange = document.querySelector('#New-salary-range');
+    var location = document.querySelector('#New-Location');
+    var description = document.querySelector('#New-Discription');
+    //var areaname = document.querySelector('#areaname1');
+
+    var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+    var formdata = {
+        'Title': title.value,
+        'Requirments': requirments.value,
+        'SalaryRange': salaryrange.value,
+        'Location': location.value,
+        'Description': description.value
+    };
+    $.ajax({
+        url : '/addnewjobs',
+        method:'POST',
+        contentType:'application/json',
+        headers : {
+            'X-CSRFToken':csrfToken
+        },
+        data:JSON.stringify(formdata),
+        success:function(data){
+            if (data.Status) {
+                window.location.href = data.redirect_url;
+            } else {
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                }
+            }
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            try {
+                var errorMsg = JSON.parse(jqXHR.responseText);
+                alert('Error occurred: ' + errorMsg.Msg);
+                if (errorMsg.redirect_url) {
+                    window.location.href = errorMsg.redirect_url;
+                }
+            } catch (e) {
+                console.error('Could not parse response as JSON: ', jqXHR.responseText);
+            }
+        }
+    });
+    });
+        
+$('.deletejobs').on('click', function(){
+    //var shipadd_id = shipadd;
+    var job_id = $(this).data('jobid');
+    console.log(job_id);
+    var csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+    var formdata = {
+        'Job_id': job_id
+    };
+    $.ajax({
+        url : '/deletejob',
+        method:'POST',
+        contentType:'application/json',
+        headers : {
+            'X-CSRFToken':csrfToken
+        },
+        data:JSON.stringify(formdata),
+        success:function(data){
+            if (data.Status) {
+                window.location.href = data.redirect_url;
+            } else {
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                }
+            }
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            try {
+                var errorMsg = JSON.parse(jqXHR.responseText);
+                alert('Error occurred: ' + errorMsg.Msg);
+                if (errorMsg.redirect_url) {
+                    window.location.href = errorMsg.redirect_url;
+                }
+            } catch (e) {
+                console.error('Could not parse response as JSON: ', jqXHR.responseText);
+            }
+        }
+    });
+    });
+</script>
+{% endblock  %}

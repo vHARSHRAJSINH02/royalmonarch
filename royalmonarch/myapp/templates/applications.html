@@ -1,0 +1,128 @@
+{% extends 'basic.html' %}
+{% block content %}
+{% load static %}
+
+<div class="datatable-container mt-5 mb-5">
+    <!-- ======= Header tools ======= -->
+    {% comment %} <div class="header-tools">
+        <div class="tools">
+          <ul>
+            <li>
+              <button class="btn-light">
+                  Add New
+              </button>
+            </li>
+          </ul>
+        </div>
+    
+         <div class="search">
+          <input type="search" class="search-input" placeholder="Search..." />
+        </div> 
+    </div> {% endcomment %}
+    
+    <!-- ======= Table ======= -->
+    <table class="datatable">
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Resume</th>
+            <th>Job_id</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          {% for i in applications %}
+          <tr>
+            <td>{{i.user_id}}</td>
+            <td>{{i.First_Name}} {{i.Last_Name}}</td>
+            <td>{{i.Email}}</td>
+            <td>{{i.Mobile}}</td>
+            <td><a href="{{i.Resume.url}}" target="_blank" class="app_a">View Resume</td>
+            <td>{{i.job_id}}</td>
+            <td>
+              <button type="button" class="btn-icon mx-auto edit-jobs" data-toggle="modal" data-target="#exampleModal" data-id="{{i.job_id}}" data-title="{{i.Title}}" data-requirments="{{i.Requirments}}" data-salary-range="{{i.Salary_Range}}" data-location="{{i.Location}}" data-description="{{i.Description}}">
+                  <i class="fa fa-eye"></i>
+               </button>
+              <button class="btn-icon mx-auto deletejobs" data-id="{{i.job_id}}">
+                  <i class="fa-solid fa fa-trash"></i>
+              </button> 
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content jobspopup">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Job details</h5>
+                  <button type="button" class="close" style="color: azure;" data-dismiss="modal" aria-label="Close">
+                      &times;
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        {% csrf_token %}
+                        <fieldset class="row-fluid">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="Title" class="label-control">Add Job Titile</label>
+                                <input type="text" name="Title" id="Title" class="form-control fw-bold " placeholder="Add job Title " />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="Requirments" class="label-control">Requirments</label>
+                                <input type="text" name="Requirments" id="Requirments" class="form-control fw-bold " placeholder="Add Requirments" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="salary-range" class="label-control">Salary-Range</label>
+                                <input type="text" name="salary-range" id="salary-range" class="form-control fw-bold " placeholder="Add salary-range " />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="Location" class="label-control">Location</label>
+                                <input type="text" name="Location" id="Location" class="form-control fw-bold " placeholder="Add Location " />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="Discription" class="label-control">Description</label>
+                                <textarea class="form-control" name="Discription" id="Discription" rows="6" placeholder="Give us more details.."></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                {% comment %} <button type="button" class="btn btn-light" data-dismiss="modal">Close</button> {% endcomment %}
+                <button type="button" class="btn btn-light editjobs">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </table>
+    
+      {% comment %} <!-- ======= Footer tools ======= -->
+      <div class="footer-tools">
+        <div class="list-items">
+          Show
+          <select name="n-entries" id="n-entries" class="n-entries">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+          </select>
+          entries
+        </div>
+    
+        <div class="pages">
+          <ul>
+            <li><span class="active">1</span></li>
+            <li><button>2</button></li>
+            <li><button>3</button></li>
+            <li><button>4</button></li>
+            <li><span>...</span></li>
+            <li><button>9</button></li>
+            <li><button>10</button></li>
+          </ul>
+        </div>
+      </div> {% endcomment %}
+<div>
+{% endblock  %}
